@@ -10,46 +10,41 @@
 
 #include "LineBase.h"
 
-class CRoomEdge : public CLineBase
-{
+class CRoomEdge : public CLineBase {
 public:
-	CRoomEdge()
-	{
-		m_idx1 = -1;
-		m_idx2 = -1;
-		m_doorFlag = true;
-	}
+  CRoomEdge() {
+    m_idx1 = -1;
+    m_idx2 = -1;
+    m_doorFlag = true;
+  }
 
-	CRoomEdge(v2f pos1, v2f pos2) : CLineBase(pos1, pos2)
-	{
-		m_idx1 = -1;
-		m_idx2 = -1;
-		m_doorFlag = true;
-	}
+  CRoomEdge(v2i pos1, v2i pos2) : CLineBase(pos1, pos2) {
+    m_idx1 = -1;
+    m_idx2 = -1;
+    m_doorFlag = true;
+  }
 
-	CRoomEdge(v2f pos1, v2f pos2, int idx1, int idx2) : CLineBase(pos1, pos2), m_idx1(idx1), m_idx2(idx2)
-	{
-		m_doorFlag = true;
-	}
+  CRoomEdge(v2i pos1, v2i pos2, int idx1, int idx2)
+      : CLineBase(pos1, pos2), m_idx1(idx1), m_idx2(idx2) {
+    m_doorFlag = true;
+  }
 
-	v2f GetDirection() { return (m_pos2 - m_pos1); }
+  v2i GetDirection() { return (GetPos2() - GetPos1()); }
 
-	v3f GetDirection3D() { return v3f(GetDirection()[0], GetDirection()[1], 0.f); }
+  int GetIdx1() const { return m_idx1; }
+  int GetIdx2() const { return m_idx2; }
 
-	int GetIdx1() const { return m_idx1; }
-	int GetIdx2() const { return m_idx2; }
+  void SetIdx1(int idx1) { m_idx1 = idx1; }
+  void SetIdx2(int idx2) { m_idx2 = idx2; }
 
-	void SetIdx1(int idx1) { m_idx1 = idx1; }
-	void SetIdx2(int idx2) { m_idx2 = idx2; }
-
-	void SetDoorFlag(bool flag) { m_doorFlag = flag; }
-	bool GetDoorFlag() { return m_doorFlag; }
+  void SetDoorFlag(bool flag) { m_doorFlag = flag; }
+  bool GetDoorFlag() { return m_doorFlag; }
 
 private:
-	int m_idx1;
-	int m_idx2;
+  int m_idx1;
+  int m_idx2;
 
-	bool m_doorFlag;
+  bool m_doorFlag;
 };
 
 #endif // ROOMEDGE_H

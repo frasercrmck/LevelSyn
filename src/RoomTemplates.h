@@ -23,9 +23,9 @@ public:
 
 	bool SaveTemplatesAsXML(const char* fileName);
 
-	int GetNumOfTemplates() { return int(m_rooms.size()); }
+	size_t GetNumOfTemplates() { return m_rooms.size(); }
 
-	CRoom& GetRoom(int idx) { return m_rooms[idx]; }
+	CRoom& GetRoom(size_t idx) { return m_rooms[idx]; }
 
 	const std::vector<CRoom>& GetRooms() const { return m_rooms; }
 

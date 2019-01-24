@@ -79,13 +79,13 @@ class CLevelTimer
   
   double GetTime()
   {
-    double time_res = (double)time(NULL);
+    double time_res = (double)time(nullptr);
     return time_res;
   }
   
   double GetElapsedTime(double old_time)
   {
-    double time_res = time(NULL);
+    double time_res = time(nullptr);
     return (time_res - old_time);
   }
 };

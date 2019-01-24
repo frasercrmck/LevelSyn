@@ -9,30 +9,27 @@
 #define CLIPPERWRAPPER_H
 
 #include "clipper.hpp"
-using namespace ClipperLib;
 
 #include "RoomLayout.h"
 
 #include "LevelMath.h"
-using namespace level_math;
 
-class CClipperWrapper
-{
+class CClipperWrapper {
 public:
-	Paths FindIntersection(const CRoom& room1, const CRoom& room2);
+  ClipperLib::Paths FindIntersection(const CRoom &room1, const CRoom &room2);
 
-	float ComputeCollideArea(const CRoom& room1, const CRoom& room2);
+  float ComputeCollideArea(const CRoom &room1, const CRoom &room2);
 
-	float ComputeRoomArea(const CRoom& room);
+  float ComputeRoomArea(const CRoom &room);
 
-	static float m_scalingFactor;
+  static float m_scalingFactor;
 
 private:
-	long64 ConvertFloatToLong64(float f);
+  ClipperLib::long64 ConvertFloatToLong64(float f);
 
-	float ConvertLong64ToFloat(long64 i);
+  float ConvertLong64ToFloat(ClipperLib::long64 i);
 
-	float ConvertDoubleAreaToFloat(double a);
+  float ConvertDoubleAreaToFloat(double a);
 };
 
-#endif //CLIPPERWRAPPER_H
+#endif // CLIPPERWRAPPER_H

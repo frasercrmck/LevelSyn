@@ -57,7 +57,7 @@ public:
 	static float m_graphScaling; // For initialization
 	static float m_roomScaling; // For rendering only
 	static float m_stateDiffThresh;
-	static float m_roomContactThresh;
+	static int m_roomContactThresh;
 	static std::string m_outputPrefix;
 
 	static void DumpTimeAndDate(FILE* file);
@@ -65,13 +65,13 @@ public:
 	static void DumpTimeAndDate(std::ofstream& fout);
 
 protected:
-	virtual void ResetConfig();
+	void ResetConfig();
 
 	bool DumpToSynConfig();
 
-	virtual void DumpParameters(FILE* file);
+	void DumpParameters(FILE* file);
 
-	virtual void UpdateOutputPrefix();
+	void UpdateOutputPrefix();
 
 	void DumpStringParam(FILE* file, const char* param, const std::string str);
 

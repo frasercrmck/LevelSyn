@@ -29,7 +29,7 @@ float CLevelConfig::m_sigmaConnectivity = 2.f;
 float CLevelConfig::m_graphScaling = 1.f;
 float CLevelConfig::m_roomScaling = 0.9f;
 float CLevelConfig::m_stateDiffThresh = 0.f;
-float CLevelConfig::m_roomContactThresh = 1e-6f;
+int CLevelConfig::m_roomContactThresh = -1;
 std::string CLevelConfig::m_outputPrefix;
 
 CLevelConfig::CLevelConfig()
@@ -152,7 +152,9 @@ bool CLevelConfig::LoadFromSynConfig(std::string fileName, bool resetFlag /* = t
 	{
 		return true;
 	}
+#if 0
 	ResetConfig();
+#endif
 
 	return true;
 }
@@ -203,7 +205,7 @@ bool CLevelConfig::DumpToSynConfig()
 
 void CLevelConfig::DumpTimeAndDate(FILE* file)
 {
-	time_t myTime = time(NULL);
+	time_t myTime = time(nullptr);
 	tm* ptrTime = localtime(&myTime);
 	fprintf(file, "%02d:%02d:%02d ", ptrTime->tm_hour, ptrTime->tm_min, ptrTime->tm_sec);
 	fprintf(file, "%02d/%02d/%04d\n\n", ptrTime->tm_mon+1, ptrTime->tm_mday, ptrTime->tm_year+1900);
@@ -211,7 +213,7 @@ void CLevelConfig::DumpTimeAndDate(FILE* file)
 
 void CLevelConfig::DumpTimeAndDate(std::ofstream& fout)
 {
-	time_t myTime = time(NULL);
+	time_t myTime = time(nullptr);
 	tm* ptrTime = localtime(&myTime);
 	char str[1000];
 	sprintf(str, "%02d:%02d:%02d ", ptrTime->tm_hour, ptrTime->tm_min, ptrTime->tm_sec);
@@ -245,7 +247,7 @@ void CLevelConfig::DumpParameters(FILE* file)
 	fprintf(file, "%s\t%f\n", "GRAPH_SCALING", m_graphScaling);
 	fprintf(file, "%s\t%f\n", "ROOM_SCALING", m_roomScaling);
 	fprintf(file, "%s\t%f\n", "STATE_DIFFERENCE_THRESHOLD", m_stateDiffThresh);
-	fprintf(file, "%s\t%f\n", "ROOM_CONTACT_THRESHOLD", m_roomContactThresh);
+	fprintf(file, "%s\t%d\n", "ROOM_CONTACT_THRESHOLD", m_roomContactThresh);
 	DumpStringParam(file, "OUTPUT_PREFIX", m_outputPrefix);
 }
 
@@ -268,7 +270,7 @@ void CLevelConfig::UpdateOutputPrefix()
 #endif
 	std::ostringstream oss;
 #ifdef WIN32
-	bool flag = CreateDirectoryA(m_outputPrefix.c_str(), NULL);
+	bool flag = CreateDirectoryA(m_outputPrefix.c_str(), nullptr);
 	const int numLength = 2;
 	while ( flag == false && m_outputPrefix.size() >= 2 )
 	{
@@ -279,7 +281,7 @@ void CLevelConfig::UpdateOutputPrefix()
 		std::ostringstream oss;
 		oss << m_outputPrefix.substr(0, m_outputPrefix.length()-numLength-1) << numChar << "\\";
 		m_outputPrefix = oss.str();
-		flag = CreateDirectoryA(m_outputPrefix.c_str(), NULL);
+		flag = CreateDirectoryA(m_outputPrefix.c_str(), nullptr);
 	}
 #else
 	std::string outputFolder = m_outputPrefix.substr(0, m_outputPrefix.size()-1);
@@ -309,6 +311,6 @@ void CLevelConfig::DumpStringParam(FILE* file, const char* param, const std::str
 	}
 	else
 	{
-		//fprintf(file, "%s\t%s\n", param, "NULL");
+		//fprintf(file, "%s\t%s\n", param, "nullptr");
 	}
 }

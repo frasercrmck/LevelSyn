@@ -10,62 +10,80 @@
 
 //#define DUMP_INTERMEDIATE_OUTPUT
 //#define DUMP_PARTIAL_SOLUTION
-#define PERFORMANCE_TEST 1
+#define PERFORMANCE_TEST
 
 #include "Room.h"
 #include <map>
 
 typedef CLineBase CorridorWall;
 
-class CRoomLayout
-{
+struct RoomConnection {
+  v2i p;
+  size_t room_idx0;
+  size_t room_idx1;
+};
+
+class CRoomLayout {
 public:
+  void ClearLayout() { m_rooms.clear(); }
 
-	void ClearLayout() { m_rooms.clear(); }
+  void AddRoom(CRoom &room) { m_rooms.push_back(room); }
+  void AddRoomConnection(RoomConnection &connection) {
+    m_connections.push_back(connection);
+  }
 
-	void AddRoom(CRoom& room) { m_rooms.push_back(room); }
+  size_t GetNumOfRooms() const { return m_rooms.size(); }
 
-	int GetNumOfRooms() { return int(m_rooms.size()); }
+  unsigned GetNumOfVertices();
 
-	int GetNumOfVertices();
+  unsigned GetNumOfEdges();
 
-	int GetNumOfEdges();
+  CRoom &GetRoom(size_t idx) { return m_rooms[idx]; }
 
-	CRoom& GetRoom(int idx) { return m_rooms[idx]; }
+  const CRoom &GetRoom(size_t idx) const { return m_rooms[idx]; }
 
-	v2i GetNearestEdgePair(int roomIdx0, int roomIdx1);
+  AABB2i GetLayoutBoundingBox() const;
 
-	void GetLayoutBoundingBox(v2f& posMin, v2f& posMax);
+  void MoveToSceneCenter();
 
-	void MoveToSceneCenter();
+  std::vector<v2i> GetRoomPositions();
 
-	std::vector<v2f> GetRoomPositions();
+  void ResetRoomEnergies();
 
-	void ResetRoomEnergies();
+  void PrintLayout() const;
 
-	void PrintLayout();
+  bool SaveLayoutAsSVG(const char *fileName, int wd = 400, int ht = 400,
+                       bool writeOnlyVisited = false,
+                       class CPlanarGraph *graphBest = nullptr,
+                       bool labelFlag = true);
 
-	bool SaveLayoutAsSVG(const char* fileName, int wd = 400, int ht = 400, bool writeOnlyVisited = false, class CPlanarGraph *graphBest = NULL, bool labelFlag = true );
+  static int ConvertPos(int p, int pMin, int pMax, int sz);
 
-	static int ConvertPos(float p, float pMin, float pMax, int sz);
+  static int ConvertPosX(int p, int pMin, int pMax, int sz);
 
-	static int ConvertPosX(float p, float pMin, float pMax, int sz);
+  static int ConvertPosY(int p, int pMin, int pMax, int sz);
 
-	static int ConvertPosY(float p, float pMin, float pMax, int sz);
+  void InsertCorridorWall(CorridorWall &wall) {
+    m_corridorWalls.push_back(wall);
+  }
 
-	void InsertCorridorWall(CorridorWall& wall) { m_corridorWalls.push_back(wall); }
+  size_t GetNumOfCorridorWalls() const { return m_corridorWalls.size(); }
 
-	int GetNumOfCorridorWalls() const { return int(m_corridorWalls.size()); }
+  RoomWall &GetCorridorWall(unsigned idx) { return m_corridorWalls[idx]; }
 
-	RoomWall& GetCorridorWall(int idx) { return m_corridorWalls[idx]; }
+  std::map<std::pair<int, int>, float> cachedCollisionEnergies;
+  std::map<std::pair<int, int>, int> cachedConnectivities;
+  std::map<std::pair<int, int>, int> cachedContacts;
 
-	std::map<std::pair<int,int>, float> cachedCollisionEnergies;
-	std::map<std::pair<int,int>, float> cachedConnectivities;
-	std::map<std::pair<int,int>, float> cachedContacts;
+  const std::vector<CRoom> &rooms() const { return m_rooms; }
+  const std::vector<RoomConnection> &connections() const {
+    return m_connections;
+  }
 
 private:
-	std::vector<CRoom> m_rooms;
-	std::vector<CorridorWall> m_corridorWalls;
+  std::vector<CRoom> m_rooms;
+  std::vector<RoomConnection> m_connections;
+  std::vector<CorridorWall> m_corridorWalls;
 };
 
 #endif // ROOMLAYOUT_H

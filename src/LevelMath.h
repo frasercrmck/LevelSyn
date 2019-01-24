@@ -9,48 +9,49 @@
 #define LEVELMATH_H
 
 #include "Room.h"
+#include <optional>
 
-namespace level_math
-{
-	typedef struct PrSort
-	{
-		v2f m_pr;
-		float m_dp; // dot product
-	} PrSort;
+namespace level_math {
+typedef struct PrSort {
+  v2i m_pr;
+  int m_dp; // dot product
+} PrSort;
 
-	const float g_numericalTolerance = 1e-4f; //1e-6;
+const float g_numericalTolerance = 0.0f; // 1e-4f; //1e-6;
 
-	const float g_numericalToleranceSq = g_numericalTolerance * g_numericalTolerance;
+int PointToSegmentSqDistance(const v2i &pt, const CLineBase &line);
 
-	float PointToSegmentSqDistance(const v2f& pt, const CLineBase& line);
+int PointToLineSqDistance(const v2i &pt, const CLineBase &line);
 
-	float PointToLineSqDistance(const v2f& pt, const CLineBase& line);
+int PointToLineSqDistance(const v2i &pt, const v2i &p1, const v2i &p2);
 
-	float PointToLineSqDistance(const v2f& pt, const v2f& p1, const v2f& p2);
+int RoomPerimeter(const CRoom &room1);
 
-	float RoomPerimeter(const CRoom& room1);
+int RoomContact(const CRoom &room1, const CRoom &room2);
 
-	float RoomContact(const CRoom& room1, const CRoom& room2);
+int RoomContact(const CRoom &room1, const CRoom &room2, size_t &edgeIdx1,
+                size_t &edgeIdx2);
 
-	float RoomContact(const CRoom& room1, const CRoom& room2, int& edgeIdx1, int& edgeIdx2);
+int EdgeContact(const CLineBase &line1, const CLineBase &line2);
 
-	float EdgeContact(const CLineBase& line1, const CLineBase& line2);
+int RoomDistance(const CRoom &room1, const CRoom &room2);
 
-	float RoomDistance(const CRoom& room1, const CRoom& room2);
+std::optional<v2i> SegmentIntersection(const CLineBase &line1,
+                                       const CLineBase &line2);
 
-	bool SegmentIntersection(v2f pa, v2f pb, v2f pc, v2f pd, v2f& pi);
+std::optional<v2i> SegmentIntersection(v2i pa, v2i pb, v2i pc, v2i pd);
 
-	bool SegmentIntersection(float Ax, float Ay, float Bx, float By, float Cx, float Cy, float Dx, float Dy, float& Ix, float& Iy);
+std::optional<v2i> SegmentIntersection(int Ax, int Ay, int Bx, int By,
+                                       int Cx, int Cy, int Dx, int Dy);
 
-	bool LineIntersection(v2f pa, v2f pb, v2f pc, v2f pd, v2f& pi);
+std::optional<v2i> LineIntersection(v2i pa, v2i pb, v2i pc, v2i pd);
 
-	bool LineIntersection(float Ax, float Ay, float Bx, float By, float Cx, float Cy, float Dx, float Dy, float& Ix, float& Iy);
+std::optional<v2i> LineIntersection(int Ax, int Ay, int Bx, int By, int Cx,
+                                    int Cy, int Dx, int Dy);
 
-	bool ComparePrSmallerFirst(const PrSort& pr1, const PrSort& pr2);
+bool ComparePrSmallerFirst(const PrSort &pr1, const PrSort &pr2);
 
-	void SortVecPr(std::vector<v2f>& vecPr);
-
-	v3f randomColorFromIndex(int idx);
-}
+void SortVecPr(std::vector<v2i> &vecPr);
+} // namespace level_math
 
 #endif // LEVELMATH_H
