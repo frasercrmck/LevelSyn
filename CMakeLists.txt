@@ -1,5 +1,6 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
-PROJECT(LevelSyn)
+cmake_minimum_required(VERSION 2.6)
+project(LevelSyn)
 
-ADD_SUBDIRECTORY(lib)
-ADD_SUBDIRECTORY(src)
+add_subdirectory(3rdparty)
+add_subdirectory(lib)
+add_subdirectory(src)
