@@ -12,9 +12,8 @@ file(GLOB LEVEL_SYN_SOURCES "*.cpp")
 add_library(LevelSyn STATIC ${LEVEL_SYN_SOURCES} )
 
 target_include_directories(LevelSyn
-  PUBLIC
+  SYSTEM PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/../include"
-  SYSTEM
     "${Boost_INCLUDE_DIRS}"
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/tinyxml"
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/clipper"
