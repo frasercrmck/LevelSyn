@@ -14,8 +14,6 @@
 #include <iostream>
 #include <vector>
 
-#include "../tinyxml/tinyxml.h"
-
 #include "RoomEdge.h"
 #include "vec.h"
 

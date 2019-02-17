@@ -8,17 +8,18 @@ link_directories    (${Boost_LIBRARY_DIRS})
 include_directories (${Boost_INCLUDE_DIRS})
 
 file(GLOB LEVEL_SYN_SOURCES "*.cpp")
-file(GLOB LEVEL_SYN_HEADERS "*.h")
 
 add_library(LevelSyn STATIC ${LEVEL_SYN_SOURCES} )
 
 target_include_directories(LevelSyn
   PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}
+    "${CMAKE_CURRENT_SOURCE_DIR}/../include"
   SYSTEM
     "${Boost_INCLUDE_DIRS}"
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/tinyxml"
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/clipper"
+  PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/../include/LevelSyn"
 )
 
 target_link_libraries(LevelSyn tinyxml clipper ${Boost_LIBRARIES})

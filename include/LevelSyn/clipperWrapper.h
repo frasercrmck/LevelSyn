@@ -8,7 +8,7 @@
 #ifndef CLIPPERWRAPPER_H
 #define CLIPPERWRAPPER_H
 
-#include "clipper.hpp"
+#include <clipper.hpp>
 
 #include "RoomLayout.h"
 

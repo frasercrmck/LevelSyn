@@ -1,5 +1,6 @@
-
 #include "RoomTemplates.h"
+#include <tinyxml.h>
+
 #include <sstream>
 
 void CRoomTemplates::PrintTemplates() {

@@ -11,10 +11,10 @@
 #include <ctime>
 #include <iostream>
 
-#include "LevelSynth.h"
-#include "LevelTimer.h"
-#include "PlanarGraph.h"
-#include "RoomTemplates.h"
+#include <LevelSyn/LevelSynth.h>
+#include <LevelSyn/LevelTimer.h>
+#include <LevelSyn/PlanarGraph.h>
+#include <LevelSyn/RoomTemplates.h>
 
 void usage(char *argv[]) {
   std::cout << "Usage: " << argv[0]
