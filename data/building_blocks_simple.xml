@@ -1,0 +1,66 @@
+<?xml version="1.0" standalone="yes" ?>
+<!-- room template data -->
+<Templates>
+    <Room>
+      <Vertex px="0" py="0" />
+      <Vertex px="0" py="3" />
+      <Vertex px="3" py="3" />
+      <Vertex px="3" py="0" />
+    </Room>
+    <Room>
+      <Vertex px="0" py="0" />
+      <Vertex px="4" py="0" />
+      <Vertex px="4" py="4" />
+      <Vertex px="0" py="4" />
+    </Room>
+    <Room>
+      <Vertex px="0" py="0" />
+      <Vertex px="5" py="0" />
+      <Vertex px="5" py="5" />
+      <Vertex px="0" py="5" />
+    </Room>
+    <Room>
+      <Vertex px="0" py="0" />
+      <Vertex px="6" py="0" />
+      <Vertex px="6" py="6" />
+      <Vertex px="0" py="6" />
+    </Room>
+    <Room>
+      <Vertex px="0" py="0" />
+      <Vertex px="0" py="7" />
+      <Vertex px="7" py="7" />
+      <Vertex px="7" py="0" />
+    </Room>
+    <Room>
+      <Vertex px="0" py="0" />
+      <Vertex px="5" py="0" />
+      <Vertex px="5" py="3" />
+      <Vertex px="0" py="3" />
+    </Room>
+    <Room>
+      <Vertex px="0" py="0" />
+      <Vertex px="6" py="0" />
+      <Vertex px="6" py="3" />
+      <Vertex px="0" py="3" />
+    </Room>
+    <Room>
+      <Vertex px="0" py="0" />
+      <Vertex px="7" py="0" />
+      <Vertex px="7" py="3" />
+      <Vertex px="0" py="3" />
+    </Room>
+    <Room>
+      <Vertex px="0" py="0" />
+      <Vertex px="8" py="0" />
+      <Vertex px="8" py="3" />
+      <Vertex px="0" py="3" />
+    </Room>
+    <Room>
+      <Vertex px="0" py="0" />
+      <Vertex px="0" py="3" />
+      <Vertex px="3" py="3" />
+      <Vertex px="3" py="1" />
+      <Vertex px="3" py="1" />
+      <Vertex px="3" py="0" />
+    </Room>
+</Templates>
