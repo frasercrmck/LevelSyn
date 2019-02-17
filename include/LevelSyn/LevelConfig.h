@@ -44,6 +44,10 @@ public:
 	static int m_numOfSolutionsToTrack;
 	static int m_synMethod;
 	static int m_targetNumOfSolutions;
+
+	static int m_maxWidth;
+	static int m_maxHeight;
+
 	// For simulated annealing...
 	static int m_saNumOfCycles;
 	static int m_saNumOfTrials;

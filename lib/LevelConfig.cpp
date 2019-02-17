@@ -20,6 +20,8 @@ int CLevelConfig::m_synMethod = 0;
 int CLevelConfig::m_saNumOfCycles = 1000;
 int CLevelConfig::m_saNumOfTrials = 1000;
 int CLevelConfig::m_targetNumOfSolutions = 100;
+int CLevelConfig::m_maxWidth = -1;
+int CLevelConfig::m_maxHeight = -1;
 float CLevelConfig::m_saProb0 = 0.001f;
 float CLevelConfig::m_saProb1 = 0.7f;
 float CLevelConfig::m_deltaEscaling = 1.0f;
@@ -90,6 +92,14 @@ bool CLevelConfig::LoadFromSynConfig(std::string fileName, bool resetFlag /* = t
 		else if ( param == std::string("NUMBER_OF_SOLUTIONS_TO_TRACK") )
 		{
 			fin >> m_numOfSolutionsToTrack;
+		}
+		else if ( param == std::string("MAX_WIDTH") )
+		{
+			fin >> m_maxWidth;
+		}
+		else if ( param == std::string("MAX_HEIGHT") )
+		{
+			fin >> m_maxHeight;
 		}
 		else if ( param == std::string("SYNTHESIS_METHOD") )
 		{

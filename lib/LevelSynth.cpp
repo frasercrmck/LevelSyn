@@ -421,8 +421,9 @@ void CLevelSynth::SynthesizeSceneViaMainLoop() {
         float energy =
             GetLayoutEnergy(m_layout, m_ptrGraph, collide, connectivity);
 
-        bool flagValid = (LayoutCollide(m_layout) == 0 &&
-                          CheckRoomConnectivity(m_layout, m_ptrGraph) == 0);
+        bool flagValid = LayoutCollide(m_layout) == 0 &&
+                         isWithinBounds(m_layout) &&
+                         CheckRoomConnectivity(m_layout, m_ptrGraph) == 0;
         if (flagValid == false) {
           // Skip invalid solution...
           continue;
@@ -1328,6 +1329,16 @@ int CLevelSynth::CheckRoomConnectivity(CRoomLayout &layout,
   }
 
   return connectivity;
+}
+
+bool CLevelSynth::isWithinBounds(const CRoomLayout &layout) const {
+  AABB2i bb = layout.GetLayoutBoundingBox();
+  int maxWidth = CLevelConfig::m_maxWidth;
+  int maxHeight = CLevelConfig::m_maxHeight;
+  int width = bb.m_posMax[0] - bb.m_posMin[0];
+  int height = bb.m_posMax[1] - bb.m_posMin[1];
+  return (maxWidth < 0 || width <= maxWidth) &&
+         (maxHeight < 0 || height <= maxHeight);
 }
 
 int CLevelSynth::LayoutCollide(CRoomLayout &layout, CPlanarGraph *ptrGraph,
