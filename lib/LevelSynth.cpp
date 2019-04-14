@@ -223,7 +223,9 @@ bool CLevelSynth::OpenDoors(CRoomLayout &layout, CPlanarGraph *ptrGraph,
                 << roomIdx1 << " and Room " << roomIdx2 << " (case 2)!\n";
       return false;
     }
-    RoomConnection connection{*flag1, edgeIdx1, edgeIdx2};
+    assert(roomIdx1 >= 0 && roomIdx2 >= 0 && "Room indices out of bounds");
+    RoomConnection connection{*flag1, static_cast<size_t>(roomIdx1),
+                              static_cast<size_t>(roomIdx2)};
     layout.AddRoomConnection(connection);
   }
   return true;
