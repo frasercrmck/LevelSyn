@@ -8,7 +8,6 @@
 #ifndef VEC_H
 #define VEC_H
 
-#include "util.h"
 #include <cassert>
 #include <cmath>
 #include <iostream>

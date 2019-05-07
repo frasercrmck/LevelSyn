@@ -1,5 +1,6 @@
 
 #include "LevelMath.h"
+#include <algorithm>
 
 namespace level_math {
 int PointToSegmentSqDistance(const v2i &pt, const CLineBase &line) {

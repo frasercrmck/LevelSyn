@@ -1,6 +1,7 @@
 
 #include "Room.h"
 #include "LevelConfig.h"
+#include <algorithm>
 
 CRoom::CRoom() {
   m_centerShift = v2i(0, 0);
