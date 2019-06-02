@@ -27,10 +27,8 @@ int PointToLineSqDistance(const v2i &pt, const v2i &p1, const v2i &p2);
 
 int RoomPerimeter(const CRoom &room1);
 
-int RoomContact(const CRoom &room1, const CRoom &room2);
-
-int RoomContact(const CRoom &room1, const CRoom &room2, size_t &edgeIdx1,
-                size_t &edgeIdx2);
+int MaxRoomContact(const CRoom &room1, const CRoom &room2,
+                   size_t *edgeIdx1 = nullptr, size_t *edgeIdx2 = nullptr);
 
 int EdgeContact(const CLineBase &line1, const CLineBase &line2);
 

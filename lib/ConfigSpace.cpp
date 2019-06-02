@@ -92,8 +92,8 @@ CConfigSpace::CConfigSpace(const CRoom &room1, const CRoom &room2) {
         if (wrapper.ComputeCollideArea(room1, room2n1) > 0) {
           continue;
         }
-        int x = RoomContact(room1, room2n1);
-        if (RoomContact(room1, room2n1) < contactThresh) {
+        int x = MaxRoomContact(room1, room2n1);
+        if (MaxRoomContact(room1, room2n1) < contactThresh) {
           continue;
         }
         CRoom room2n2 = room2;
@@ -101,8 +101,8 @@ CConfigSpace::CConfigSpace(const CRoom &room1, const CRoom &room2) {
         if (wrapper.ComputeCollideArea(room1, room2n2) > 0) {
           continue;
         }
-        int y = RoomContact(room1, room2n2);
-        if (RoomContact(room1, room2n2) < contactThresh) {
+        int y = MaxRoomContact(room1, room2n2);
+        if (MaxRoomContact(room1, room2n2) < contactThresh) {
           continue;
         }
         CRoom room2n3 = room2;
@@ -110,8 +110,8 @@ CConfigSpace::CConfigSpace(const CRoom &room1, const CRoom &room2) {
         if (wrapper.ComputeCollideArea(room1, room2n3) > 0) {
           continue;
         }
-        int z = RoomContact(room1, room2n3);
-        if (RoomContact(room1, room2n3) < contactThresh) {
+        int z = MaxRoomContact(room1, room2n3);
+        if (MaxRoomContact(room1, room2n3) < contactThresh) {
           continue;
         }
         v2i pos1 = room2.GetRoomCenter() + pr1;

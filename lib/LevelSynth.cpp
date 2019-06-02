@@ -197,7 +197,7 @@ bool CLevelSynth::OpenDoors(CRoomLayout &layout, CPlanarGraph *ptrGraph,
       continue;
     }
     size_t edgeIdx1, edgeIdx2;
-    int contact = RoomContact(room1, room2, edgeIdx1, edgeIdx2);
+    int contact = MaxRoomContact(room1, room2, &edgeIdx1, &edgeIdx2);
     if (contact < CLevelConfig::m_roomContactThresh) {
       if (flagPartial == false) {
         std::cout << "Failed to open the door on the wall between Room "
@@ -1309,7 +1309,8 @@ int CLevelSynth::CheckRoomConnectivity(CRoomLayout &layout,
     if (roomMoved == -1 || roomMoved == idx0 || roomMoved == idx1 ||
         layout.cachedConnectivities.find(std::make_pair(idx0, idx1)) ==
             layout.cachedConnectivities.end()) {
-      int contactArea = RoomContact(layout.GetRoom(idx0), layout.GetRoom(idx1));
+      int contactArea =
+          MaxRoomContact(layout.GetRoom(idx0), layout.GetRoom(idx1));
       if (contactArea < CLevelConfig::m_roomContactThresh) {
         if (CLevelConfig::m_flagDiscreteConnectFunc == true) {
           connectivity += 1;
@@ -1526,7 +1527,7 @@ int CLevelSynth::LayoutContact(CRoomLayout &layout, CPlanarGraph *ptrGraph,
           layout.cachedContacts[std::make_pair(i, j)] = 0;
           continue;
         }
-        int contactArea = RoomContact(layout.GetRoom(i), layout.GetRoom(j));
+        int contactArea = MaxRoomContact(layout.GetRoom(i), layout.GetRoom(j));
         if (contactArea > CLevelConfig::m_roomContactThresh) {
           contactArea -= CLevelConfig::m_roomContactThresh;
           layout.cachedContacts[std::make_pair(i, j)] = contactArea;

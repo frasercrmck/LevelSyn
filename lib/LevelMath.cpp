@@ -49,26 +49,9 @@ int RoomPerimeter(const CRoom &room1) {
   return contactArea;
 }
 
-int RoomContact(const CRoom &room1, const CRoom &room2) {
-  int contactArea = 0;
-  for (size_t i = 0; i < room1.GetNumOfEdges(); i++) {
-    CRoomEdge edge1 = room1.GetEdge(i);
-    for (size_t j = 0; j < room2.GetNumOfEdges(); j++) {
-      CRoomEdge edge2 = room2.GetEdge(j);
-      if (edge1.GetDoorFlag() == false || edge2.GetDoorFlag() == false) {
-        continue;
-      }
-      int contactAreaTmp = EdgeContact(edge1, edge2);
-      contactArea += contactAreaTmp;
-    }
-  }
-
-  return contactArea;
-}
-
-int RoomContact(const CRoom &room1, const CRoom &room2, size_t &edgeIdx1,
-                size_t &edgeIdx2) {
-  int contactAreaMax = 0.f;
+int MaxRoomContact(const CRoom &room1, const CRoom &room2, size_t *edgeIdx1,
+                   size_t *edgeIdx2) {
+  int contactAreaMax = 0;
   for (size_t i = 0; i < room1.GetNumOfEdges(); i++) {
     CRoomEdge edge1 = room1.GetEdge(i);
     for (size_t j = 0; j < room2.GetNumOfEdges(); j++) {
@@ -79,8 +62,12 @@ int RoomContact(const CRoom &room1, const CRoom &room2, size_t &edgeIdx1,
       int contactAreaTmp = EdgeContact(edge1, edge2);
       if (contactAreaTmp > contactAreaMax) {
         contactAreaMax = contactAreaTmp;
-        edgeIdx1 = i;
-        edgeIdx2 = j;
+        if (edgeIdx1) {
+          *edgeIdx1 = i;
+        }
+        if (edgeIdx2) {
+          *edgeIdx2 = j;
+        }
       }
     }
   }
