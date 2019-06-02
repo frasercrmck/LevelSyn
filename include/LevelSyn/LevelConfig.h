@@ -26,7 +26,8 @@ class CLevelConfig {
 public:
   CLevelConfig();
 
-  bool LoadFromSynConfig(std::string fileName, bool resetFlag = true);
+  bool LoadFromSynConfig(std::string fileName, unsigned seed,
+                         bool resetFlag = true);
 
   static std::string AddOutputPrefix(std::string str);
 

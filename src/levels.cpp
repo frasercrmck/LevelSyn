@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
   CLevelSynth level_synthesizer;
   std::string input_graph_name = argv[1];
   std::string input_template_name = argv[2];
-  level_config.LoadFromSynConfig(argv[3]);
+  level_config.LoadFromSynConfig(argv[3], (unsigned)time(0));
   if (argc > 4) {
     CLevelConfig::m_targetNumOfSolutions = atoi(argv[4]);
   }
@@ -45,9 +45,6 @@ int main(int argc, char **argv) {
   room_templates.SaveTemplatesAsXML(
       CLevelConfig::AddOutputPrefix(input_template_name).c_str());
 
-  if (CLevelConfig::m_flagRandomness) {
-    srand((unsigned int)time(0));
-  }
 #if 0
   if (CLevelConfig::m_flagEnrichTemplates == true) {
     room_templates.EnrichByRotating180Degrees();

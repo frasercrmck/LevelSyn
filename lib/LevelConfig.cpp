@@ -36,7 +36,7 @@ std::string CLevelConfig::m_outputPrefix;
 
 CLevelConfig::CLevelConfig() {}
 
-bool CLevelConfig::LoadFromSynConfig(std::string fileName,
+bool CLevelConfig::LoadFromSynConfig(std::string fileName, unsigned seed,
                                      bool resetFlag /* = true */) {
   std::ifstream fin(fileName.c_str());
   if (fin.fail() == true) {
@@ -105,6 +105,9 @@ bool CLevelConfig::LoadFromSynConfig(std::string fileName,
   if (resetFlag == false) {
     return true;
   }
+  if (m_flagRandomness == true) {
+    srand(seed);
+  }
 #if 0
 	ResetConfig();
 #endif
@@ -123,9 +126,6 @@ std::string CLevelConfig::AddOutputPrefix(std::string str) {
 }
 
 void CLevelConfig::ResetConfig() {
-  if (m_flagRandomness == true) {
-    srand((unsigned int)time(0));
-  }
   if (m_outputPrefix.empty() == false) {
     UpdateOutputPrefix();
   }
