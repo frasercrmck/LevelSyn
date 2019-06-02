@@ -170,6 +170,7 @@ private:
                             int roomThatMoved = -1);
 
   bool isWithinBounds(const CRoomLayout &layout) const;
+  bool areConstraintsMet(const CRoomLayout &layout) const;
 
   int LayoutCollide(CRoomLayout &layout, CPlanarGraph *ptrGraph,
                     bool flagVisitedOnly = false, int roomThatMoved = -1);

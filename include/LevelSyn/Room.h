@@ -81,8 +81,17 @@ public:
   RoomWall &GetWall(size_t idx) { return m_walls[idx]; }
   const RoomWall &GetWall(size_t idx) const { return m_walls[idx]; }
 
+  int GetMetaType() const { return m_metaType; }
+  void SetMetaType(int type) { m_metaType = type; }
+
   int GetTemplateType() const { return m_templateType; }
   void SetTemplateType(int type) { m_templateType = type; }
+
+  int GetMinimumOccurrences() const { return m_minimum; }
+  void SetMinimumOccurrences(int min) { m_minimum = min; }
+
+  int GetMaximumOccurrences() const { return m_maximum; }
+  void SetMaximumOccurrences(int min) { m_maximum = min; }
 
   int GetBoundaryType() const { return m_boundaryType; }
   void SetBoundaryType(int type) { m_boundaryType = type; }
@@ -108,7 +117,11 @@ private:
 
   float m_energy;
 
+  int m_metaType;
   int m_templateType;
+
+  int m_minimum = -1;
+  int m_maximum = std::numeric_limits<int>::max();
 
   bool m_flagFixed;
 

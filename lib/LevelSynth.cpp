@@ -423,7 +423,8 @@ void CLevelSynth::SynthesizeSceneViaMainLoop() {
         float energy =
             GetLayoutEnergy(m_layout, m_ptrGraph, collide, connectivity);
 
-        bool flagValid = LayoutCollide(m_layout) == 0 &&
+        bool flagValid = areConstraintsMet(m_layout) &&
+                         LayoutCollide(m_layout) == 0 &&
                          isWithinBounds(m_layout) &&
                          CheckRoomConnectivity(m_layout, m_ptrGraph) == 0;
         if (flagValid == false) {
@@ -1331,6 +1332,41 @@ int CLevelSynth::CheckRoomConnectivity(CRoomLayout &layout,
   }
 
   return connectivity;
+}
+
+bool CLevelSynth::areConstraintsMet(const CRoomLayout &layout) const {
+  int numOfRooms = layout.GetNumOfRooms();
+  const auto templates = m_ptrTemplates->GetRooms();
+  std::unordered_map<int, unsigned> constraints;
+  for (const auto &t : templates) {
+    constraints[t.GetTemplateType()] = 0;
+  }
+  for (size_t i = 0; i < numOfRooms; i++) {
+    const auto &r = layout.GetRoom(i);
+    auto it = constraints.find(r.GetTemplateType());
+    assert(it != constraints.end());
+    it->second++;
+  }
+  for (const auto &t : templates) {
+    auto it = constraints.find(t.GetTemplateType());
+    assert(it != constraints.end());
+    if (auto min = t.GetMinimumOccurrences(); min != -1 && it->second < min) {
+#ifdef PRINT_OUT_DEBUG_INFO
+      std::cout << "Count " << it->second << " does not meet min of " << min
+                << "\n";
+#endif
+      return false;
+    }
+    if (auto max = t.GetMaximumOccurrences();
+        max != std::numeric_limits<int>::max() && it->second > max) {
+#ifdef PRINT_OUT_DEBUG_INFO
+      std::cout << "Count " << it->second << " does not meet max of " << max
+                << "\n";
+#endif
+      return false;
+    }
+  }
+  return true;
 }
 
 bool CLevelSynth::isWithinBounds(const CRoomLayout &layout) const {

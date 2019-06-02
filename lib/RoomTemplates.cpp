@@ -66,6 +66,22 @@ bool CRoomTemplates::LoadTemplatesFromXML(const char *fileName) {
           if (r == TIXML_SUCCESS) {
             room.SetBoundaryType(type);
           }
+        } else if (strcmp(xmlChildNode->Value(), "Meta") == 0) {
+          int type;
+          int r = xmlChildNode->ToElement()->QueryIntAttribute("type", &type);
+          if (r == TIXML_SUCCESS) {
+            room.SetMetaType(type);
+          }
+          int min;
+          r = xmlChildNode->ToElement()->QueryIntAttribute("min", &min);
+          if (r == TIXML_SUCCESS) {
+            room.SetMinimumOccurrences(min);
+          }
+          int max;
+          r = xmlChildNode->ToElement()->QueryIntAttribute("max", &max);
+          if (r == TIXML_SUCCESS) {
+            room.SetMaximumOccurrences(max);
+          }
         } else if (strcmp(xmlChildNode->Value(), "Door") == 0) {
           int idx;
           int r =
