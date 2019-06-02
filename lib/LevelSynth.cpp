@@ -118,6 +118,31 @@ void CLevelSynth::SetGraphAndTemplates(CPlanarGraph *ptrGraph,
   m_ptrGraph->SetNumOfTypes(m_ptrTemplates->GetNumOfTemplates());
   m_ptrGraph->RandomInitTypes();
 
+  size_t numOfRooms = ptrGraph->GetNumOfNodes();
+  size_t numOfTemplates = m_ptrTemplates->GetNumOfTemplates();
+
+  for (size_t i = 0; i < numOfRooms; ++i) {
+    auto &node = m_ptrGraph->GetNode(i);
+    if (node.GetMetaType() < 0) {
+      continue;
+    }
+#ifdef PRINT_OUT_DEBUG_INFO
+    std::cout << "Node " << i << " needs a room with meta type "
+              << node.GetMetaType() << "\n";
+#endif
+
+    for (size_t r_idx = 0; r_idx < numOfTemplates; ++r_idx) {
+      const CRoom &room = m_ptrTemplates->GetRoom(r_idx);
+      if (node.GetMetaType() == room.GetMetaType()) {
+#ifdef PRINT_OUT_DEBUG_INFO
+        std::cout << "Found room with index = " << r_idx << "\n";
+#endif
+        node.SetType(r_idx);
+        node.SetFixedType(r_idx);
+      }
+    }
+  }
+
   // m_ptrGraph->RandomInitPositions();
   InitScene();
   SynthesizeScene();
@@ -1221,6 +1246,11 @@ int CLevelSynth::RandomlyAdjustOneRoom04(CRoomLayout &layout,
 
   int pickedRoomIndex = RandomlyPickOneRoom(layout, indices, weightedIndices);
   CRoom &pickedRoom = layout.GetRoom(pickedRoomIndex);
+
+  // Some types are fixed: we may not choose a new room for them
+  if (ptrGraph->GetNode(pickedRoomIndex).IsTypeFixed()) {
+    return -1;
+  }
 
   int typeOld = ptrGraph->GetNode(pickedRoomIndex).GetType();
   int typeNew = typeOld;

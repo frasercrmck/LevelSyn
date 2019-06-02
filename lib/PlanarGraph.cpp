@@ -81,6 +81,11 @@ bool CPlanarGraph::LoadGraphFromXML(const char *fileName,
       if (*str != '\0') {
         graphNode.SetName(str);
       }
+      int meta_type;
+      int rm = xmlNode->ToElement()->QueryIntAttribute("metatype", &meta_type);
+      if (rm == TIXML_SUCCESS) {
+        graphNode.SetMetaType(meta_type);
+      }
       AddGraphNode(graphNode);
     } else if (strcmp(xmlNode->Value(), "Edge") == 0) {
       // Parse an edge...

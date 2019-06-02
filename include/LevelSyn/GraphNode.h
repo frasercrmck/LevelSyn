@@ -69,6 +69,15 @@ public:
   int GetType() { return m_type; }
   void SetType(int type) { m_type = type; }
 
+  void SetFixedType(int type) {
+    m_type = type;
+    m_flagFixedType = true;
+  }
+  bool IsTypeFixed() const { return m_flagFixedType; }
+
+  int GetMetaType() { return m_metatype; }
+  void SetMetaType(int type) { m_metatype = type; }
+
   int GetBoundaryType() const { return m_boundaryType; }
   void SetBoundaryType(int type) { m_boundaryType = type; }
 
@@ -78,7 +87,9 @@ private:
   std::vector<int> m_neighbors;
   bool m_flagVisited;
   bool m_flagFixed;
+  bool m_flagFixedType = false;
   int m_type; // index of the room template
+  int m_metatype = -1;
   int m_boundaryType;
 };
 
