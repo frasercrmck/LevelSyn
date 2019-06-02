@@ -13,72 +13,70 @@
 #else
 #include <sys/stat.h>
 #endif
-#include <cstdlib>
 #include <cstdio>
-#include <iostream>
-#include <iomanip>
+#include <cstdlib>
+#include <ctime>
 #include <fstream>
+#include <iomanip>
+#include <iostream>
 #include <sstream>
 #include <string>
-#include <ctime>
 
-class CLevelConfig
-{
+class CLevelConfig {
 public:
-	CLevelConfig();
+  CLevelConfig();
 
-	bool LoadFromSynConfig(std::string fileName, bool resetFlag = true);
+  bool LoadFromSynConfig(std::string fileName, bool resetFlag = true);
 
-	static std::string AddOutputPrefix(std::string str);
+  static std::string AddOutputPrefix(std::string str);
 
-	static bool m_flagRandomness;
-	static bool m_flagEnableTypeChange;
-	static bool m_flagEnrichTemplates;
-	static bool m_flagEqualPickProb;
-	static bool m_flagDiscreteConnectFunc;
-	static bool m_flagRandomPick;
-	static bool m_flagNonOverlapContact;
-	static bool m_flagSmallFaceFirst;
-	static bool m_flagUseILS;
-	static bool m_flagRandomWalk;
-	static int m_numOfSolutionsToTrack;
-	static int m_synMethod;
-	static int m_targetNumOfSolutions;
+  static bool m_flagRandomness;
+  static bool m_flagEnableTypeChange;
+  static bool m_flagEnrichTemplates;
+  static bool m_flagEqualPickProb;
+  static bool m_flagDiscreteConnectFunc;
+  static bool m_flagRandomPick;
+  static bool m_flagNonOverlapContact;
+  static bool m_flagSmallFaceFirst;
+  static bool m_flagUseILS;
+  static bool m_flagRandomWalk;
+  static int m_numOfSolutionsToTrack;
+  static int m_synMethod;
+  static int m_targetNumOfSolutions;
 
-	static int m_maxWidth;
-	static int m_maxHeight;
+  static int m_maxWidth;
+  static int m_maxHeight;
 
-	// For simulated annealing...
-	static int m_saNumOfCycles;
-	static int m_saNumOfTrials;
-	static float m_saProb0;
-	static float m_saProb1;
-	static float m_deltaEscaling;
-	// For layout energy calculation...
-	static float m_sigmaCollide;
-	static float m_sigmaContact;
-	static float m_sigmaConnectivity;
-	static float m_graphScaling; // For initialization
-	static float m_roomScaling; // For rendering only
-	static float m_stateDiffThresh;
-	static int m_roomContactThresh;
-	static std::string m_outputPrefix;
+  // For simulated annealing...
+  static int m_saNumOfCycles;
+  static int m_saNumOfTrials;
+  static float m_saProb0;
+  static float m_saProb1;
+  static float m_deltaEscaling;
+  // For layout energy calculation...
+  static float m_sigmaCollide;
+  static float m_sigmaContact;
+  static float m_sigmaConnectivity;
+  static float m_graphScaling; // For initialization
+  static float m_roomScaling;  // For rendering only
+  static float m_stateDiffThresh;
+  static int m_roomContactThresh;
+  static std::string m_outputPrefix;
 
-	static void DumpTimeAndDate(FILE* file);
+  static void DumpTimeAndDate(FILE *file);
 
-	static void DumpTimeAndDate(std::ofstream& fout);
+  static void DumpTimeAndDate(std::ofstream &fout);
 
 protected:
-	void ResetConfig();
+  void ResetConfig();
 
-	bool DumpToSynConfig();
+  bool DumpToSynConfig();
 
-	void DumpParameters(FILE* file);
+  void DumpParameters(FILE *file);
 
-	void UpdateOutputPrefix();
+  void UpdateOutputPrefix();
 
-	void DumpStringParam(FILE* file, const char* param, const std::string str);
-
+  void DumpStringParam(FILE *file, const char *param, const std::string str);
 };
 
-#endif //LEVELCONFIG_H
+#endif // LEVELCONFIG_H

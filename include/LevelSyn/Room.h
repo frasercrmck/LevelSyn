@@ -107,7 +107,6 @@ public:
 
   const std::vector<RoomWall> &walls() const { return m_walls; }
 
-
 private:
   std::vector<v2i> m_vertices;
 

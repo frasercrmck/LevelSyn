@@ -168,9 +168,7 @@ private:
   // Some planar face traversal visitors that will
   // print the vertices and edges on the faces
   struct output_visitor : public boost::planar_face_traversal_visitor {
-    void begin_face() {
-      m_faceTmp.ClearIndices();
-    }
+    void begin_face() { m_faceTmp.ClearIndices(); }
 
     void end_face() {
       if (m_faceTmp.IsEmpty() == false) {

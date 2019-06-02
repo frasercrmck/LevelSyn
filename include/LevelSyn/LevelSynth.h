@@ -179,13 +179,14 @@ private:
 
 public:
   int RoomCollides(CRoom &room1, CRoom &room2);
-private:
 
+private:
   bool TestBoundingBoxCollides(AABB2i &bb1, AABB2i &bb2);
 
   int LayoutContact(CRoomLayout &layout, CPlanarGraph *ptrGraph,
                     bool flagVisitedOnly = false, bool flagNonOverlap = false,
-                    std::vector<int> *indices = nullptr, int roomThatMoved = -1);
+                    std::vector<int> *indices = nullptr,
+                    int roomThatMoved = -1);
 
   v2i ComputeLabelPosition(int idx, CPlanarGraph *ptrGraph, float labelRad);
 

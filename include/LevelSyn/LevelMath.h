@@ -41,8 +41,8 @@ std::optional<v2i> SegmentIntersection(const CLineBase &line1,
 
 std::optional<v2i> SegmentIntersection(v2i pa, v2i pb, v2i pc, v2i pd);
 
-std::optional<v2i> SegmentIntersection(int Ax, int Ay, int Bx, int By,
-                                       int Cx, int Cy, int Dx, int Dy);
+std::optional<v2i> SegmentIntersection(int Ax, int Ay, int Bx, int By, int Cx,
+                                       int Cy, int Dx, int Dy);
 
 std::optional<v2i> LineIntersection(v2i pa, v2i pb, v2i pc, v2i pd);
 

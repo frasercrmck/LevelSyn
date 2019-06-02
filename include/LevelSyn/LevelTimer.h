@@ -12,22 +12,19 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 
-class CLevelTimer
-{
+class CLevelTimer {
 public:
-	CLevelTimer() {}
+  CLevelTimer() {}
 
-	double GetTime()
-	{
-		double time = CFAbsoluteTimeGetCurrent();
-		return time;
-	}
+  double GetTime() {
+    double time = CFAbsoluteTimeGetCurrent();
+    return time;
+  }
 
-	double GetElapsedTime(double old_time)
-	{
-		double time = CFAbsoluteTimeGetCurrent();
-		return (time - old_time);
-	}
+  double GetElapsedTime(double old_time) {
+    double time = CFAbsoluteTimeGetCurrent();
+    return (time - old_time);
+  }
 };
 
 #endif
@@ -37,33 +34,29 @@ public:
 #include <windows.h>
 typedef __int64 i64;
 
-class CLevelTimer
-{
+class CLevelTimer {
 public:
-	CLevelTimer();
-	double GetTime();
-	double GetElapsedTime(double old_time);
+  CLevelTimer();
+  double GetTime();
+  double GetElapsedTime(double old_time);
 
 private:
-	i64 m_freq;
-	i64 m_clocks;
+  i64 m_freq;
+  i64 m_clocks;
 };
 
-CLevelTimer::CLevelTimer() : m_clocks(0)
-{
-	QueryPerformanceFrequency((LARGE_INTEGER *)&m_freq);
+CLevelTimer::CLevelTimer() : m_clocks(0) {
+  QueryPerformanceFrequency((LARGE_INTEGER *)&m_freq);
 }
 
-double CLevelTimer::GetTime()
-{
-	QueryPerformanceCounter((LARGE_INTEGER *)&m_clocks);
-	return (double)m_clocks / (double)m_freq;
+double CLevelTimer::GetTime() {
+  QueryPerformanceCounter((LARGE_INTEGER *)&m_clocks);
+  return (double)m_clocks / (double)m_freq;
 }
 
-double CLevelTimer::GetElapsedTime(double old_time)
-{
-	QueryPerformanceCounter((LARGE_INTEGER *)&m_clocks);
-	return ((double)m_clocks / (double)m_freq - old_time);
+double CLevelTimer::GetElapsedTime(double old_time) {
+  QueryPerformanceCounter((LARGE_INTEGER *)&m_clocks);
+  return ((double)m_clocks / (double)m_freq - old_time);
 }
 
 #endif
@@ -72,19 +65,16 @@ double CLevelTimer::GetElapsedTime(double old_time)
 
 #include <time.h>
 
-class CLevelTimer
-{
- public:
+class CLevelTimer {
+public:
   CLevelTimer() {}
-  
-  double GetTime()
-  {
+
+  double GetTime() {
     double time_res = (double)time(nullptr);
     return time_res;
   }
-  
-  double GetElapsedTime(double old_time)
-  {
+
+  double GetElapsedTime(double old_time) {
     double time_res = time(nullptr);
     return (time_res - old_time);
   }

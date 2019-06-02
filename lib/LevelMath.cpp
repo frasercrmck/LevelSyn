@@ -125,7 +125,7 @@ int EdgeContact(const CLineBase &line1, const CLineBase &line2) {
 }
 
 int RoomDistance(const CRoom &room1, const CRoom &room2) {
-  int d = std::numeric_limits<int>::max();;
+  int d = std::numeric_limits<int>::max();
   for (size_t i = 0; i < room1.GetNumOfVertices(); i++) {
     v2i pt = room1.GetVertex(i);
     for (size_t j = 0; j < room2.GetNumOfEdges(); j++) {
@@ -151,8 +151,8 @@ std::optional<v2i> SegmentIntersection(v2i pa, v2i pb, v2i pc, v2i pd) {
 
 // Based on the example under
 // http://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect
-std::optional<v2i> SegmentIntersection(int Ax, int Ay, int Bx, int By,
-                                       int Cx, int Cy, int Dx, int Dy) {
+std::optional<v2i> SegmentIntersection(int Ax, int Ay, int Bx, int By, int Cx,
+                                       int Cy, int Dx, int Dy) {
   int Rx = Bx - Ax;
   int Ry = By - Ay;
   int Sx = Dx - Cx;
